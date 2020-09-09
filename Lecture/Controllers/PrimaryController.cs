@@ -63,16 +63,57 @@ namespace Lecture.Controllers
             return View();
         }
         // update writer in db by ID
-        [HttpPut]
-        public IActionResult UpdateWriter()
+        [HttpPost]
+        public IActionResult UpdateWriter(WriterModel updateWriter)
         {
-            return Content($"Update");
+            WriterModel foundWriter = _context.writers.FirstOrDefault(writer => writer.id == updateWriter.id);
+            if(ModelState.IsValid)
+            {
+                foundWriter.fName = updateWriter.fName;
+                foundWriter.lName = updateWriter.lName;
+                foundWriter.age = updateWriter.age;
+                foundWriter.isPublished = updateWriter.isPublished;
+                _context.SaveChanges();
+                // return Content($"Update");   
+                return RedirectToAction("ViewAll", "Primary");        
+            } else
+            {
+                string displayErr = "";
+                List<string> errors = GetErrorListFromModelState(ModelState);
+                errors.ForEach(err => displayErr += $" {err} ");
+                ViewData["errors"] = displayErr;
+                return View("EditForm", updateWriter);               
+            }
+
+        }
+        public IActionResult EditForm(int id)
+        {
+            WriterModel foundWriter = _context.writers.FirstOrDefault(writer => writer.id == id);
+            if(foundWriter != null)
+            {
+                return View(foundWriter);
+            } else
+            {
+                ViewData["error"] = "No writer found";
+                return View("Error");
+            }
         }
         // delete writer in db by ID
-        [HttpDelete]
-        public IActionResult DeleteWriter()
+        [HttpGet]
+        public IActionResult DeleteWriter(int writerID)
         {
-            return Content($"Delete");
+            WriterModel foundWriter = _context.writers.FirstOrDefault(writer => writer.id == writerID);
+            if(foundWriter != null)
+            {
+                _context.Remove(foundWriter);
+                _context.SaveChanges();
+                // return Content($"Delete");   
+                return RedirectToAction("ViewAll", "Primary");
+            } else
+            {
+                ViewData["error"] = "No writer found to delete";
+                return View("Error");
+            }
         }
         // method to capture model state validation errors
         public static List<string> GetErrorListFromModelState(ModelStateDictionary modelState)

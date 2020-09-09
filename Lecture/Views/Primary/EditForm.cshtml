@@ -1,0 +1,34 @@
+@model Lecture.Models.WriterModel
+<h1>Writer Form</h1>
+@* add error messages *@
+@if(@ViewData["errors"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["errors"]
+    </div>
+}
+@using (@Html.BeginForm("UpdateWriter", "Primary"))
+{
+    <div class="form-group">
+        @Html.LabelFor(writer => writer.id)
+        @Html.TextBoxFor(writer => writer.id, new { @class="form-control", @readonly="readonly"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(writer => writer.fName)
+        @Html.TextBoxFor(writer => writer.fName, new { @class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(writer => writer.lName)
+        @Html.TextBoxFor(writer => writer.lName, new { @class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(writer => writer.age)
+        @Html.TextBoxFor(writer => writer.age, new { @class="form-control"})
+    </div>
+  <div class="form-check">
+      @Html.CheckBoxFor(writer => writer.isPublished, new { @class = "form-check-input"})
+      @Html.LabelFor(writer => writer.isPublished, new { @class = "form-check-label"})
+  </div>
+  <button type="submit" class="btn btn-primary"> Submit </button>
+}

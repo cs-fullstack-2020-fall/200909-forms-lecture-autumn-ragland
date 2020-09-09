@@ -18,3 +18,10 @@
         </tr>   
     </tbody>
 </table>
+<a asp-area="" asp-controller="Primary" asp-action="EditForm" asp-route-id = "@Model.id">
+    <button class="btn btn-primary">Edit</button>
+</a>
+<a asp-area="" asp-controller="Primary" asp-action="DeleteWriter" asp-route-writerID = "@Model.id">
+    <button class="btn btn-danger">Delete</button>
+</a>
+
