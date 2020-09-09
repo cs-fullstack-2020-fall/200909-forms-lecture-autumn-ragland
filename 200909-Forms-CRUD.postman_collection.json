@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "5144662f-aacd-46c4-9e16-17cf3b8637e8",
+		"name": "200909-Forms-CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "View All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/Primary/ViewAll",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"Primary",
+						"ViewAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View One",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/Primary/ViewOne?writerID=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"Primary",
+						"ViewOne"
+					],
+					"query": [
+						{
+							"key": "writerID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "fName",
+							"value": "Amet",
+							"type": "text"
+						},
+						{
+							"key": "lName",
+							"value": "Consectetur ",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "17",
+							"type": "text"
+						},
+						{
+							"key": "isPublished",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:5001/Primary/AddWriter",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"Primary",
+						"AddWriter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "fName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "lName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "isPublished",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:5001/Primary/UpdateWriter",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"Primary",
+						"UpdateWriter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "writerID",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:5001/Primary/DeleteWriter",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"Primary",
+						"DeleteWriter"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

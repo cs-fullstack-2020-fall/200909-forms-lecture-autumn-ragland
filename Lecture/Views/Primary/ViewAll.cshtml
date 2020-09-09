@@ -1,0 +1,23 @@
+ @model Lecture.DAO.LectureDbContext
+ <h1>View All</h1>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Is Published</th> 
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (WriterModel writer in @Model.writers)
+        {
+            <tr>
+                <th scrope="row">@writer.id</th>
+                <td> <a asp-area="" asp-controller="Primary" asp-action="ViewOne" asp-route-writerID ="@writer.id">@writer.fName @writer.lName</a> </td>
+                <td>@writer.age</td>
+                <td>@writer.isPublished</td>
+            </tr>
+        }            
+        </tbody>
+    </table>

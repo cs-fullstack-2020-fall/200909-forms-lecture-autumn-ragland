@@ -1,0 +1,20 @@
+@model Lecture.Models.WriterModel
+<h1>View One</h1>
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Is Published</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scrope="row">@Model.id</th>
+            <td>@Model.fName @Model.lName</td>
+            <td>@Model.age</td>
+            <td>@Model.isPublished</td>
+        </tr>   
+    </tbody>
+</table>
