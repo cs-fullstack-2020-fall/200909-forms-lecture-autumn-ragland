@@ -3,6 +3,7 @@ using System.Linq;
 using Lecture.DAO;
 using Lecture.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Lecture.Controllers
 {
@@ -41,9 +42,25 @@ namespace Lecture.Controllers
         [HttpPost]
         public IActionResult AddWriter(WriterModel newWriter)
         {
-            _context.writers.Add(newWriter);
-            _context.SaveChanges();
-            return Content($"Added {newWriter.id}");
+            if(ModelState.IsValid)
+            {
+                _context.writers.Add(newWriter);
+                _context.SaveChanges();
+                // return Content($"Added {newWriter.id}");
+                return RedirectToAction("ViewAll", "Primary");                
+            } else 
+            {
+                string displayErr = "";
+                List<string> errors = GetErrorListFromModelState(ModelState);
+                errors.ForEach(err => displayErr += $" {err} ");
+                ViewData["errors"] = displayErr;
+                return View("WriterForm", newWriter);
+            }
+
+        }
+        public IActionResult WriterForm()
+        {
+            return View();
         }
         // update writer in db by ID
         [HttpPut]
@@ -56,6 +73,16 @@ namespace Lecture.Controllers
         public IActionResult DeleteWriter()
         {
             return Content($"Delete");
+        }
+        // method to capture model state validation errors
+        public static List<string> GetErrorListFromModelState(ModelStateDictionary modelState)
+        {
+            IEnumerable<string> query = from state in modelState.Values
+                from error in state.Errors
+                select error.ErrorMessage;
+
+            List<string> errorList = query.ToList();
+            return errorList;
         }
     }
 }
